@@ -176,8 +176,16 @@ const data = [
 ];
 
 let editMode=false,openCards=new Set([1]),activeFilter=null;
+const EDIT_PASSWORD='RepTalent2025';
 
 function toggleEdit(){
+  if(!editMode){
+    const pwd=prompt('Mot de passe requis pour le mode édition :');
+    if(pwd!==EDIT_PASSWORD){
+      if(pwd!==null) alert('Mot de passe incorrect.');
+      return;
+    }
+  }
   editMode=!editMode;
   const btn=document.getElementById('editToggle');
   btn.textContent=editMode?'✓ Terminer édition':'✎ Mode édition';
