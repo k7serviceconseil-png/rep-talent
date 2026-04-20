@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comment ça fonctionne — RepTalent</title>
+  <meta name="description" content="Découvrez le processus RepTalent en 5 étapes — simple, discret et fait pour les représentants des ventes B2B.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { padding: 56px 40px 48px; background: var(--gris-bg); border-bottom: 1px solid var(--gris-bordure); }
+    .page-hero h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .page-hero p { font-size: 16px; color: var(--gris-secondaire); max-width: 540px; line-height: 1.7; }
+    .content-wrap { max-width: 1100px; margin: 0 auto; }
+
+    .steps-timeline { display: flex; flex-direction: column; max-width: 720px; }
+    .step-item { display: grid; grid-template-columns: 52px 1fr; gap: 0 20px; }
+    .step-left { display: flex; flex-direction: column; align-items: center; }
+    .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--bleu); color: white; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1; }
+    .step-line { width: 2px; background: var(--bleu-clair); flex: 1; margin: 6px 0; }
+    .step-item:last-child .step-line { display: none; }
+    .step-content { padding-bottom: 36px; }
+    .step-title { font-size: 18px; font-weight: 600; color: var(--gris-texte); margin: 10px 0 8px; }
+    .step-text { font-size: 14px; color: var(--gris-secondaire); line-height: 1.75; margin-bottom: 10px; }
+    .step-note { background: var(--gris-bg); border-radius: var(--radius-md); padding: 12px 16px; font-size: 13px; color: var(--gris-secondaire); line-height: 1.6; }
+    .step-note strong { font-weight: 600; color: var(--gris-texte); }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; max-width: 720px; }
+    .compare-card { border-radius: var(--radius-lg); padding: 22px; }
+    .compare-neg { background: var(--gris-bg); border: 1px solid var(--gris-bordure); }
+    .compare-pos { background: var(--bleu-clair); border: 1px solid #B5D4F4; }
+    .compare-title { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+    .compare-neg .compare-title { color: var(--gris-secondaire); }
+    .compare-pos .compare-title { color: var(--bleu-hover); }
+    .compare-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 13px; line-height: 1.5; }
+    .compare-neg .compare-item { color: var(--gris-secondaire); }
+    .compare-pos .compare-item { color: var(--bleu-hover); }
+    .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+    .dot-neg { background: #B4B2A9; }
+    .dot-pos { background: var(--bleu); }
+
+    .faq-list { max-width: 720px; }
+    .faq-item { border-bottom: 1px solid var(--gris-bordure); }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; cursor: pointer; gap: 12px; }
+    .faq-q-text { font-size: 15px; font-weight: 600; color: var(--gris-texte); }
+    .faq-chevron { font-size: 11px; color: var(--gris-tertaire); transition: transform 0.2s; flex-shrink: 0; }
+    .faq-chevron.open { transform: rotate(180deg); }
+    .faq-a { font-size: 14px; color: var(--gris-secondaire); line-height: 1.75; padding-bottom: 16px; display: none; }
+    .faq-a.show { display: block; }
+
+    @media(max-width:768px) {
+      .page-hero { padding: 40px 20px 32px; }
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#185FA5"/>
+      <circle cx="24" cy="20" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+      <circle cx="24" cy="20" r="3" fill="white"/>
+      <path d="M12 44 C12 34 36 34 36 44" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="44" cy="40" r="9" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="4.5" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="1.8" fill="#5DCAA5"/>
+    </svg>
+    <span class="nav-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html" class="active">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
+  <a href="depot-cv.html" class="nav-cta">Déposer mon CV</a>
+</nav>
+
+<div class="page-hero">
+  <div class="section-eyebrow">Le processus</div>
+  <h1>Simple, discret et fait pour les représentants.</h1>
+  <p>Pas de processus d'embauche public, pas de candidature à répétition. Tu déposes ton profil une seule fois — on s'occupe de trouver l'opportunité qui te correspond.</p>
+</div>
+
+<section class="section">
+  <div class="content-wrap">
+    <div class="section-eyebrow">Étape par étape</div>
+    <h2 class="section-title">Ce qui se passe après que tu déposes ton CV</h2>
+    <p class="section-sub">De la réception de ton profil jusqu'à ta prochaine offre d'emploi.</p>
+    <div class="steps-timeline">
+      <div class="step-item">
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">Tu déposes ton CV — en 3 minutes</div>
+          <div class="step-text">Tu remplis le formulaire une seule fois. Ton nom, ton expérience, tes secteurs de prédilection et tes attentes. C'est tout ce dont nous avons besoin pour commencer.</div>
+          <div class="step-note"><strong>Confidentiel dès le départ.</strong> Ton profil est reçu uniquement par notre équipe. Aucun employeur n'a accès à ton CV à cette étape.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">On analyse ton profil — sous 24 heures</div>
+          <div class="step-text">Un membre de notre équipe lit ton CV et évalue ton profil en fonction des mandats actifs et à venir. Nous ne faisons pas de tri automatisé — c'est une vraie personne qui analyse ton parcours.</div>
+          <div class="step-note"><strong>Ce que nous évaluons :</strong> ton expérience en ventes B2B, tes secteurs de spécialisation, tes résultats (quotas, territoires), et ton potentiel de placement à court terme.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">On te contacte pour une courte conversation</div>
+          <div class="step-text">Si ton profil correspond à un mandat actif ou à venir, nous te contactons pour une conversation de 15 à 20 minutes. L'objectif : mieux cerner tes attentes, ta personnalité de vente et ce que tu ne veux surtout pas dans ton prochain poste.</div>
+          <div class="step-note"><strong>Aucune obligation.</strong> Cette conversation ne t'engage à rien. Si après discussion tu ne souhaites pas aller de l'avant, on s'arrête là — sans pression.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">On te présente les opportunités — avec ta permission</div>
+          <div class="step-text">Quand une offre correspond vraiment à ton profil, nous te la présentons en détail avant de faire quoi que ce soit. Tu décides si tu veux que nous présentions ta candidature à l'employeur. Jamais à ton insu.</div>
+          <div class="step-note"><strong>Ton CV n'est transmis à aucun employeur sans ton accord explicite.</strong> C'est notre engagement fondamental envers chaque représentant inscrit.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-title">On t'accompagne jusqu'à l'offre finale</div>
+          <div class="step-text">Si tu décides d'aller de l'avant, nous coordonnons les entretiens, te préparons et agissons comme intermédiaire entre toi et l'employeur. Notre rôle est de maximiser tes chances — et de t'éviter les démarches fastidieuses.</div>
+          <div class="step-note"><strong>Gratuit pour toi, de bout en bout.</strong> Nos honoraires sont toujours assumés par l'employeur — jamais par le représentant.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-bg">
+  <div class="content-wrap">
+    <div class="section-eyebrow">Pourquoi RepTalent plutôt qu'un jobboard</div>
+    <h2 class="section-title">Ce que tu obtiens ici que tu ne trouveras pas ailleurs.</h2>
+    <div class="compare-grid">
+      <div class="compare-card compare-neg">
+        <div class="compare-title">Jobboard généraliste</div>
+        <div class="compare-item"><div class="dot dot-neg"></div>Ton CV visible par n'importe qui</div>
+        <div class="compare-item"><div class="dot dot-neg"></div>Postes souvent déjà comblés</div>
+        <div class="compare-item"><div class="dot dot-neg"></div>Aucun suivi personnalisé</div>
+        <div class="compare-item"><div class="dot dot-neg"></div>Tu dois postuler toi-même, poste par poste</div>
+        <div class="compare-item"><div class="dot dot-neg"></div>Pas de connaissance du marché B2B</div>
+      </div>
+      <div class="compare-card compare-pos">
+        <div class="compare-title">RepTalent.ca</div>
+        <div class="compare-item"><div class="dot dot-pos"></div>Ton profil 100 % confidentiel</div>
+        <div class="compare-item"><div class="dot dot-pos"></div>Mandats actifs et non affichés publiquement</div>
+        <div class="compare-item"><div class="dot dot-pos"></div>Accompagnement personnalisé à chaque étape</div>
+        <div class="compare-item"><div class="dot dot-pos"></div>On travaille pour toi — pas l'inverse</div>
+        <div class="compare-item"><div class="dot dot-pos"></div>Spécialisé exclusivement en ventes B2B</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content-wrap">
+    <div class="section-eyebrow">Questions fréquentes</div>
+    <h2 class="section-title">Ce que les représentants nous demandent le plus souvent.</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(0)"><div class="faq-q-text">Est-ce vraiment gratuit pour moi ?</div><span class="faq-chevron" id="fc0">▼</span></div><div class="faq-a" id="fa0">Oui, absolument. Nos services sont entièrement gratuits pour les représentants. Nos honoraires de recrutement sont toujours facturés à l'employeur qui nous confie un mandat. Tu ne paies jamais rien, que tu sois placé ou non.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(1)"><div class="faq-q-text">Mon employeur actuel pourrait-il savoir que je cherche ?</div><span class="faq-chevron" id="fc1">▼</span></div><div class="faq-a" id="fa1">Non. Ton profil est strictement confidentiel. Ton CV n'est jamais partagé sans ton accord explicite, et nous ne divulguons jamais le nom de nos candidats à des tiers. Si tu es à l'écoute discrètement, c'est exactement le type de service que nous offrons.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(2)"><div class="faq-q-text">Combien de temps avant d'avoir des nouvelles ?</div><span class="faq-chevron" id="fc2">▼</span></div><div class="faq-a" id="fa2">Nous accusons réception de ton profil dans les 24 heures ouvrables. Si ton profil correspond à un mandat actif, nous te contacterons rapidement. Sinon, ton profil reste dans notre base et nous revenons vers toi dès qu'une opportunité pertinente se présente.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(3)"><div class="faq-q-text">Je ne cherche pas activement — est-ce que ça vaut la peine de déposer mon CV quand même ?</div><span class="faq-chevron" id="fc3">▼</span></div><div class="faq-a" id="fa3">Absolument. La plupart des représentants qui passent par RepTalent.ca n'étaient pas activement en recherche. Ils étaient simplement à l'écoute. Déposer ton profil te permet d'être contacté si une opportunité exceptionnelle se présente — sans que tu aies à faire quoi que ce soit.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(4)"><div class="faq-q-text">Couvrez-vous toutes les régions du Québec ?</div><span class="faq-chevron" id="fc4">▼</span></div><div class="faq-a" id="fa4">Nos mandats sont principalement concentrés dans la région de Montréal et de Québec, mais nous avons également des postes dans d'autres régions selon les mandats actifs. Si tu es en région, dépose quand même ton CV — nous te contacterons si une opportunité correspond à ta localisation.</div></div>
+    </div>
+  </div>
+</section>
+
+<div style="padding: 0 40px 48px;">
+  <div style="max-width:1100px;margin:0 auto;background:linear-gradient(135deg,#0d1b2a 0%,#185FA5 100%);border-radius:var(--radius-lg);padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div style="font-size:22px;font-weight:700;color:white;margin-bottom:6px;letter-spacing:-0.3px">Prêt à laisser les opportunités venir à toi ?</div>
+      <div style="font-size:15px;color:rgba(255,255,255,0.7)">Dépose ton CV gratuitement — confidentiel, sans engagement, en 3 minutes.</div>
+    </div>
+    <a href="depot-cv.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;padding:13px 28px;background:white;color:var(--bleu);border-radius:var(--radius-md);text-decoration:none;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Déposer mon CV maintenant</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></div>
+    <div class="footer-sub">Spécialiste en recherche de talents</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="depot-cv.html">Déposer mon CV</a>
+  </div>
+  <div class="footer-copy">© 2025 RepTalent.ca · rep-talent.ca · Montréal, Québec</div>
+</footer>
+
+<script>
+function toggleFaq(i){
+  document.getElementById('fa'+i).classList.toggle('show');
+  document.getElementById('fc'+i).classList.toggle('open');
+}
+</script>
+</body>
+</html>

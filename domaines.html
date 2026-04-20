@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domaines & postes — RepTalent</title>
+  <meta name="description" content="Découvrez les 11 secteurs B2B pour lesquels RepTalent recrute des représentants des ventes au Québec.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { padding: 56px 40px 40px; background: var(--gris-bg); border-bottom: 1px solid var(--gris-bordure); }
+    .page-hero h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .page-hero p { font-size: 15px; color: var(--gris-secondaire); max-width: 520px; line-height: 1.65; }
+    .b2b-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--bleu-clair); color: var(--bleu-hover); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.04em; }
+
+    .toolbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 40px; border-bottom: 1px solid var(--gris-bordure); gap: 12px; flex-wrap: wrap; background: var(--blanc); position: sticky; top: 64px; z-index: 50; }
+    .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill { font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--gris-bordure); border-radius: 20px; cursor: pointer; color: var(--gris-secondaire); background: var(--blanc); transition: all 0.15s; }
+    .pill:hover { border-color: var(--bleu); color: var(--bleu); }
+    .pill.active { background: var(--bleu-clair); color: var(--bleu-hover); border-color: #85B7EB; }
+    .edit-btn { font-size: 12px; font-weight: 500; padding: 7px 16px; border: 1px solid var(--gris-bordure); border-radius: var(--radius-md); cursor: pointer; color: var(--gris-secondaire); background: var(--blanc); transition: all 0.15s; white-space: nowrap; }
+    .edit-btn:hover { border-color: var(--bleu); color: var(--bleu); }
+    .edit-btn.on { background: var(--bleu-clair); color: var(--bleu-hover); border-color: #85B7EB; }
+
+    .domains { padding: 32px 40px; display: flex; flex-direction: column; gap: 12px; max-width: 900px; }
+    .domain-card { background: var(--blanc); border: 1px solid var(--gris-bordure); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .domain-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; gap: 12px; transition: background 0.15s; }
+    .domain-header:hover { background: var(--gris-bg); }
+    .domain-left { display: flex; align-items: center; gap: 14px; }
+    .domain-icon { width: 40px; height: 40px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+    .domain-name { font-size: 15px; font-weight: 600; color: var(--gris-texte); }
+    .domain-count { font-size: 12px; color: var(--gris-tertaire); margin-top: 1px; }
+    .domain-chevron { font-size: 11px; color: var(--gris-tertaire); transition: transform 0.2s; }
+    .domain-chevron.open { transform: rotate(180deg); }
+
+    .postes-list { border-top: 1px solid var(--gris-bordure); padding: 10px 16px; display: flex; flex-direction: column; gap: 4px; }
+    .poste-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: var(--radius-md); gap: 8px; transition: background 0.12s; }
+    .poste-row:hover { background: var(--gris-bg); }
+    .poste-title { font-size: 14px; color: var(--gris-texte); font-weight: 500; flex: 1; }
+    .poste-badges { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+    .pbadge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    .pbadge-new { background: var(--vert-clair); color: var(--vert-hover); }
+    .pbadge-urgent { background: #FAEEDA; color: #633806; }
+    .pbadge-spec { background: #EEEDFE; color: #3C3489; }
+    .pbadge-region { background: #F1EFE8; color: #444441; }
+
+    .poste-edit-row { display: flex; align-items: center; gap: 8px; padding: 8px 12px; flex-wrap: wrap; }
+    .poste-input { font-size: 13px; padding: 7px 10px; border: 1px solid var(--gris-bordure); border-radius: var(--radius-sm); background: var(--blanc); color: var(--gris-texte); font-family: 'DM Sans', sans-serif; }
+    .poste-input:focus { outline: none; border-color: var(--bleu); }
+    .save-btn { font-size: 12px; font-weight: 600; padding: 7px 14px; background: var(--bleu); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .del-btn { font-size: 12px; padding: 7px 10px; border: 1px solid var(--gris-bordure); border-radius: var(--radius-sm); cursor: pointer; color: var(--gris-tertaire); background: transparent; font-family: 'DM Sans', sans-serif; }
+    .add-poste { display: flex; align-items: center; gap: 8px; padding: 10px 12px; cursor: pointer; color: var(--bleu); font-size: 13px; font-weight: 500; border-top: 1px dashed var(--gris-bordure); margin-top: 4px; transition: background 0.12s; border-radius: 0 0 var(--radius-md) var(--radius-md); }
+    .add-poste:hover { background: var(--bleu-clair); }
+
+    .cta-bottom { margin: 0 40px 40px; padding: 24px 28px; background: var(--bleu-clair); border: 1px solid #B5D4F4; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .cta-bottom p { font-size: 14px; color: var(--bleu-hover); max-width: 480px; line-height: 1.55; }
+
+    @media(max-width:768px) {
+      .page-hero { padding: 40px 20px 28px; }
+      .toolbar { padding: 12px 20px; }
+      .domains { padding: 20px; }
+      .cta-bottom { margin: 0 20px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#185FA5"/>
+      <circle cx="24" cy="20" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+      <circle cx="24" cy="20" r="3" fill="white"/>
+      <path d="M12 44 C12 34 36 34 36 44" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="44" cy="40" r="9" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="4.5" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="1.8" fill="#5DCAA5"/>
+    </svg>
+    <span class="nav-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html" class="active">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
+  <a href="depot-cv.html" class="nav-cta">Déposer mon CV</a>
+</nav>
+
+<div class="page-hero">
+  <div class="b2b-badge">100 % B2B</div>
+  <h1>Domaines & postes disponibles</h1>
+  <p>Tous nos mandats sont en vente B2B — des postes de représentants auprès d'entreprises, dans des secteurs spécialisés à forte valeur ajoutée.</p>
+</div>
+
+<div class="toolbar">
+  <div class="filter-pills">
+    <div class="pill active" onclick="filterAll(this)">Tous les secteurs</div>
+    <div class="pill" onclick="filterTag(this,'urgent')">Urgent</div>
+    <div class="pill" onclick="filterTag(this,'nouveau')">Nouveaux postes</div>
+    <div class="pill" onclick="filterTag(this,'spécialisé')">Très spécialisé</div>
+  </div>
+  <button class="edit-btn" id="editToggle" onclick="toggleEdit()">✎ Mode édition</button>
+</div>
+
+<div class="domains" id="domainList"></div>
+
+<div class="cta-bottom">
+  <p>Ton secteur n'est pas listé ? Nos mandats évoluent chaque semaine. Dépose ton CV — on te contacte dès qu'une opportunité correspondante se présente.</p>
+  <a href="depot-cv.html" class="btn-primary">Déposer mon CV</a>
+</div>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></div>
+    <div class="footer-sub">Spécialiste en recherche de talents</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="depot-cv.html">Déposer mon CV</a>
+  </div>
+  <div class="footer-copy">© 2025 RepTalent.ca · rep-talent.ca · Montréal, Québec</div>
+</footer>
+
+<script>
+const data = [
+  {id:1,icon:'💊',color:'#E1F5EE',name:'Pharmaceutique & santé',postes:[
+    {title:'Représentant pharmaceutique – Montréal',tags:['nouveau','montréal']},
+    {title:'Délégué médical – Québec',tags:['urgent','québec']},
+    {title:'Représentant dispositifs médicaux B2B',tags:['montréal']}
+  ]},
+  {id:2,icon:'💻',color:'#E6F1FB',name:'Technologies & logiciels (SaaS B2B)',postes:[
+    {title:'Représentant SaaS B2B – Montréal',tags:['urgent','montréal']},
+    {title:'Account Executive – solutions cloud',tags:['nouveau','montréal']},
+    {title:'Représentant ventes internes – tech B2B',tags:['montréal']}
+  ]},
+  {id:3,icon:'⚙️',color:'#FAEEDA',name:'Automatisation & robotique',postes:[
+    {title:'Représentant – solutions d\'automatisation industrielle',tags:['spécialisé','urgent','québec']},
+    {title:'Représentant robotique – secteur manufacturier',tags:['spécialisé','nouveau','montréal']}
+  ]},
+  {id:4,icon:'🏗',color:'#F1EFE8',name:'Construction & matériaux B2B',postes:[
+    {title:'Représentant matériaux de construction – entrepreneurs',tags:['québec']},
+    {title:'Représentant ventes – fournisseurs B2B',tags:['nouveau','montréal']}
+  ]},
+  {id:5,icon:'🔬',color:'#EEEDFE',name:'Sciences & laboratoires',postes:[
+    {title:'Représentant – équipements de laboratoire',tags:['spécialisé','montréal']},
+    {title:'Représentant solutions diagnostiques B2B',tags:['spécialisé','urgent','québec']}
+  ]},
+  {id:6,icon:'⚡',color:'#EAF3DE',name:'Énergie & environnement',postes:[
+    {title:'Représentant énergies renouvelables B2B',tags:['urgent','québec']},
+    {title:'Représentant – solutions environnementales industrielles',tags:['spécialisé','montréal']}
+  ]},
+  {id:7,icon:'🍽',color:'#FBEAF0',name:'Alimentation & distribution B2B',postes:[
+    {title:'Représentant ventes – ICI (institutions, commerces, industries)',tags:['nouveau','montréal']},
+    {title:'Représentant distribution alimentaire – grossistes',tags:['québec']}
+  ]},
+  {id:8,icon:'🏢',color:'#E6F1FB',name:'Services aux entreprises',postes:[
+    {title:'Représentant B2B – services RH & recrutement',tags:['montréal']},
+    {title:'Représentant – solutions télécommunications B2B',tags:['urgent','montréal']}
+  ]},
+  {id:9,icon:'🔧',color:'#FAECE7',name:'Industriel & manufacturier',postes:[
+    {title:'Représentant industriel – équipements lourds',tags:['urgent','québec']},
+    {title:'Représentant – solutions manufacturières spécialisées',tags:['spécialisé','montréal']}
+  ]},
+  {id:10,icon:'🛡',color:'#FAEEDA',name:'Cybersécurité & TI spécialisée',postes:[
+    {title:'Représentant – solutions cybersécurité B2B',tags:['spécialisé','nouveau','montréal']},
+    {title:'Représentant TI – infrastructures d\'entreprise',tags:['spécialisé','montréal']}
+  ]},
+  {id:11,icon:'📦',color:'#E1F5EE',name:'Logistique & chaîne d\'approvisionnement',postes:[
+    {title:'Représentant – solutions logistiques B2B',tags:['montréal']},
+    {title:'Représentant transport & distribution – entreprises',tags:['nouveau','québec']}
+  ]}
+];
+
+let editMode=false,openCards=new Set([1]),activeFilter=null;
+
+function toggleEdit(){
+  editMode=!editMode;
+  const btn=document.getElementById('editToggle');
+  btn.textContent=editMode?'✓ Terminer édition':'✎ Mode édition';
+  btn.className=editMode?'edit-btn on':'edit-btn';
+  render();
+}
+function filterAll(el){
+  activeFilter=null;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');render();
+}
+function filterTag(el,tag){
+  activeFilter=tag;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');render();
+}
+function toggleCard(id){
+  if(openCards.has(id))openCards.delete(id);else openCards.add(id);render();
+}
+function addPoste(domId){
+  const dom=data.find(d=>d.id===domId);
+  dom.postes.push({title:'Nouveau poste',tags:[]});
+  openCards.add(domId);render();
+}
+function deletePoste(domId,pi){
+  data.find(d=>d.id===domId).postes.splice(pi,1);render();
+}
+function savePoste(domId,pi){
+  const dom=data.find(d=>d.id===domId);
+  const val=document.getElementById('inp_'+domId+'_'+pi).value;
+  const region=document.getElementById('sel_'+domId+'_'+pi).value;
+  const t=[];
+  if(document.getElementById('new_'+domId+'_'+pi).checked)t.push('nouveau');
+  if(document.getElementById('urg_'+domId+'_'+pi).checked)t.push('urgent');
+  if(document.getElementById('spec_'+domId+'_'+pi).checked)t.push('spécialisé');
+  if(region)t.push(region);
+  dom.postes[pi].title=val;dom.postes[pi].tags=t;render();
+}
+function badgeHtml(tag){
+  if(tag==='nouveau')return '<span class="pbadge pbadge-new">Nouveau</span>';
+  if(tag==='urgent')return '<span class="pbadge pbadge-urgent">Urgent</span>';
+  if(tag==='spécialisé')return '<span class="pbadge pbadge-spec">Spécialisé</span>';
+  return '<span class="pbadge pbadge-region">'+tag.charAt(0).toUpperCase()+tag.slice(1)+'</span>';
+}
+function render(){
+  const list=document.getElementById('domainList');
+  let filtered=data;
+  if(activeFilter)filtered=data.map(d=>({...d,postes:d.postes.filter(p=>p.tags.includes(activeFilter))})).filter(d=>d.postes.length>0);
+  list.innerHTML=filtered.map(dom=>{
+    const isOpen=openCards.has(dom.id);
+    const countLabel=dom.postes.length+' poste'+(dom.postes.length>1?'s':'');
+    let postesHtml='';
+    if(isOpen){
+      postesHtml='<div class="postes-list">';
+      dom.postes.forEach((p,pi)=>{
+        if(editMode){
+          const hasNew=p.tags.includes('nouveau'),hasUrgent=p.tags.includes('urgent'),hasSpec=p.tags.includes('spécialisé');
+          const region=p.tags.find(t=>t==='montréal'||t==='québec')||'';
+          postesHtml+=`<div class="poste-edit-row">
+            <input class="poste-input" id="inp_${dom.id}_${pi}" value="${p.title}" style="flex:1;min-width:180px">
+            <select class="poste-input" id="sel_${dom.id}_${pi}" style="width:115px">
+              <option value="">Région</option>
+              <option value="montréal"${region==='montréal'?' selected':''}>Montréal</option>
+              <option value="québec"${region==='québec'?' selected':''}>Québec</option>
+            </select>
+            <label style="font-size:12px;color:var(--gris-secondaire);display:flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap"><input type="checkbox" id="new_${dom.id}_${pi}"${hasNew?' checked':''}> Nouveau</label>
+            <label style="font-size:12px;color:var(--gris-secondaire);display:flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap"><input type="checkbox" id="urg_${dom.id}_${pi}"${hasUrgent?' checked':''}> Urgent</label>
+            <label style="font-size:12px;color:var(--gris-secondaire);display:flex;align-items:center;gap:4px;cursor:pointer;white-space:nowrap"><input type="checkbox" id="spec_${dom.id}_${pi}"${hasSpec?' checked':''}> Spécialisé</label>
+            <button class="save-btn" onclick="savePoste(${dom.id},${pi})">Sauv.</button>
+            <button class="del-btn" onclick="deletePoste(${dom.id},${pi})">✕</button>
+          </div>`;
+        }else{
+          postesHtml+=`<div class="poste-row"><span class="poste-title">${p.title}</span><div class="poste-badges">${p.tags.map(badgeHtml).join('')}</div></div>`;
+        }
+      });
+      if(editMode)postesHtml+=`<div class="add-poste" onclick="addPoste(${dom.id})">+ Ajouter un poste</div>`;
+      postesHtml+='</div>';
+    }
+    return `<div class="domain-card"><div class="domain-header" onclick="toggleCard(${dom.id})"><div class="domain-left"><div class="domain-icon" style="background:${dom.color}">${dom.icon}</div><div><div class="domain-name">${dom.name}</div><div class="domain-count">${countLabel} disponible${dom.postes.length>1?'s':''}</div></div></div><span class="domain-chevron${isOpen?' open':''}">▼</span></div>${postesHtml}</div>`;
+  }).join('');
+}
+render();
+</script>
+</body>
+</html>

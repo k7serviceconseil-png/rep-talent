@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RepTalent — Spécialiste en recherche de talents en ventes B2B</title>
+  <meta name="description" content="RepTalent.ca met ton profil devant les employeurs qui cherchent exactement quelqu'un comme toi. Gratuit, confidentiel, sans engagement.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero {
+      padding: 96px 40px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--vert);
+      background: var(--vert-clair);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--gris-texte);
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+    .hero-title .accent { color: var(--bleu); }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--gris-secondaire);
+      line-height: 1.7;
+      max-width: 540px;
+      margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+    .hero-note { font-size: 13px; color: var(--gris-tertaire); }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .benefit-card {
+      background: var(--blanc);
+      border: 1px solid var(--gris-bordure);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .benefit-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .benefit-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--bleu-clair);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .benefit-icon.vert { background: var(--vert-clair); }
+    .benefit-title { font-size: 16px; font-weight: 600; color: var(--gris-texte); margin-bottom: 6px; }
+    .benefit-text { font-size: 14px; color: var(--gris-secondaire); line-height: 1.6; }
+
+    .steps-wrap { max-width: 700px; margin: 0 auto; }
+    .step-item { display: grid; grid-template-columns: 48px 1fr; gap: 0 20px; }
+    .step-left { display: flex; flex-direction: column; align-items: center; }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bleu); color: white;
+      font-size: 15px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; z-index: 1;
+    }
+    .step-line { width: 2px; background: var(--bleu-clair); flex: 1; margin: 6px 0; }
+    .step-item:last-child .step-line { display: none; }
+    .step-content { padding-bottom: 32px; }
+    .step-title { font-size: 17px; font-weight: 600; color: var(--gris-texte); margin: 8px 0 6px; }
+    .step-text { font-size: 14px; color: var(--gris-secondaire); line-height: 1.7; }
+
+    .testimonial-wrap { max-width: 700px; margin: 0 auto; }
+    .testimonial {
+      background: var(--blanc);
+      border: 1px solid var(--gris-bordure);
+      border-left: 4px solid var(--vert);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 28px 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .testimonial-text { font-size: 17px; color: var(--gris-texte); line-height: 1.75; font-style: italic; margin-bottom: 16px; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bleu-clair); color: var(--bleu-hover);
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .author-name { font-size: 14px; font-weight: 600; color: var(--gris-texte); }
+    .author-role { font-size: 13px; color: var(--gris-tertaire); }
+
+    .cta-section {
+      background: linear-gradient(135deg, #0d1b2a 0%, #185FA5 100%);
+      padding: 72px 40px;
+      text-align: center;
+    }
+    .cta-section h2 { font-size: 36px; font-weight: 700; color: white; margin-bottom: 12px; letter-spacing: -0.5px; }
+    .cta-section p { font-size: 17px; color: rgba(255,255,255,0.7); margin-bottom: 32px; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+      padding: 13px 28px; background: white; color: var(--bleu);
+      border: none; border-radius: var(--radius-md); cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .cta-note { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 14px; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 60px 20px 48px; }
+      .hero-title { font-size: 34px; }
+      .hero-sub { font-size: 16px; }
+      .cta-section { padding: 48px 20px; }
+      .cta-section h2 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#185FA5"/>
+      <circle cx="24" cy="20" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+      <circle cx="24" cy="20" r="3" fill="white"/>
+      <path d="M12 44 C12 34 36 34 36 44" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="44" cy="40" r="9" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="4.5" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="1.8" fill="#5DCAA5"/>
+    </svg>
+    <span class="nav-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
+  <a href="depot-cv.html" class="nav-cta">Déposer mon CV</a>
+</nav>
+
+<main>
+
+  <section style="background: var(--gris-bg); border-bottom: 1px solid var(--gris-bordure);">
+    <div class="hero">
+      <div class="hero-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#1D9E75"/></svg>
+        Chasseur de tête · Spécialiste ventes B2B
+      </div>
+      <h1 class="hero-title">Les meilleurs reps méritent les <span class="accent">meilleures offres.</span></h1>
+      <p class="hero-sub">RepTalent.ca met ton profil devant les employeurs qui cherchent exactement quelqu'un comme toi — sans que tu aies à faire la démarche toi-même.</p>
+      <div class="hero-actions">
+        <a href="depot-cv.html" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 2v8M4 6l4 4 4-4"/><path d="M2 12h12"/></svg>
+          Déposer mon CV gratuitement
+        </a>
+        <a href="comment-ca-fonctionne.html" class="btn-secondary">Comment ça fonctionne →</a>
+      </div>
+      <div class="reassure-bar">
+        <div class="reassure-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
+          Gratuit pour les représentants
+        </div>
+        <div class="reassure-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
+          Confidentiel — aucun partage sans ta permission
+        </div>
+        <div class="reassure-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
+          Sans engagement
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div style="max-width:1100px;margin:0 auto">
+      <div class="section-eyebrow">Ce que tu obtiens</div>
+      <h2 class="section-title">Pourquoi confier ton profil à RepTalent ?</h2>
+      <p class="section-sub">Un service pensé pour les représentants des ventes B2B, pas pour les employeurs.</p>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M6 8h8M6 11h5"/></svg>
+          </div>
+          <div class="benefit-title">Postes non affichés</div>
+          <div class="benefit-text">Accède à des opportunités exclusives que tu ne trouveras pas sur les jobboards publics.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3 17c0-3.866 3.134-6 7-6s7 2.134 7 6"/></svg>
+          </div>
+          <div class="benefit-title">Accompagnement personnalisé</div>
+          <div class="benefit-text">Un chasseur de tête dédié qui comprend ton parcours et tes ambitions en vente B2B.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon vert">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1D9E75" stroke-width="1.8" stroke-linecap="round"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 15l-4.9 2.2.9-5.5L2 7.8l5.5-.8z"/></svg>
+          </div>
+          <div class="benefit-title">Confidentialité garantie</div>
+          <div class="benefit-text">Ton CV n'est jamais partagé sans ta permission. Ta recherche reste entièrement discrète.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-bg">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+      <div>
+        <div class="section-eyebrow">Comment ça fonctionne</div>
+        <h2 class="section-title">Simple. Rapide. Efficace.</h2>
+        <p class="section-sub">Trois étapes pour que ton profil travaille pour toi.</p>
+        <a href="comment-ca-fonctionne.html" class="btn-secondary">Voir le processus complet →</a>
+      </div>
+      <div class="steps-wrap" style="margin:0">
+        <div class="step-item">
+          <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-title">Tu déposes ton CV</div>
+            <div class="step-text">En quelques minutes, ton profil est entre nos mains. Pas de formulaire interminable.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-title">On analyse ton profil</div>
+            <div class="step-text">Notre équipe identifie les meilleures opportunités selon ton expérience et tes objectifs.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-title">On te présente les bonnes offres</div>
+            <div class="step-text">Tu reçois uniquement des opportunités pertinentes. Tu décides — sans pression.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div style="max-width:1100px;margin:0 auto">
+      <div class="section-eyebrow">Témoignage</div>
+      <div class="testimonial-wrap" style="margin:0">
+        <div class="testimonial">
+          <div class="testimonial-text">« Je n'avais pas eu à envoyer un seul CV. Deux semaines après avoir déposé mon profil sur RepTalent, j'avais une offre qui correspondait exactement à ce que je cherchais. »</div>
+          <div class="testimonial-author">
+            <div class="avatar">ML</div>
+            <div>
+              <div class="author-name">Marc L.</div>
+              <div class="author-role">Représentant senior, solutions B2B · Montréal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <h2>Prêt à laisser les opportunités venir à toi ?</h2>
+    <p>Dépose ton CV gratuitement. Confidentiel. Sans engagement. En 3 minutes.</p>
+    <a href="depot-cv.html" class="btn-white">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#185FA5" stroke-width="2" stroke-linecap="round"><path d="M8 2v8M4 6l4 4 4-4"/><path d="M2 12h12"/></svg>
+      Déposer mon CV maintenant
+    </a>
+    <div class="cta-note">Gratuit · Confidentiel · Sans engagement</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></div>
+    <div class="footer-sub">Spécialiste en recherche de talents</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="depot-cv.html">Déposer mon CV</a>
+  </div>
+  <div class="footer-copy">© 2025 RepTalent.ca · rep-talent.ca · Montréal, Québec</div>
+</footer>
+
+</body>
+</html>

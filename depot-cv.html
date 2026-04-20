@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Déposer mon CV — RepTalent</title>
+  <meta name="description" content="Dépose ton CV gratuitement sur RepTalent.ca. Confidentiel, sans engagement, en 3 minutes.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero { padding: 48px 40px 36px; background: var(--gris-bg); border-bottom: 1px solid var(--gris-bordure); }
+    .page-hero h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .page-hero p { font-size: 15px; color: var(--gris-secondaire); max-width: 500px; line-height: 1.65; }
+
+    .form-wrap { max-width: 720px; padding: 40px; }
+    .form-section { margin-bottom: 36px; }
+    .form-section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris-tertaire); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--gris-bordure); }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .field-row.single { grid-template-columns: 1fr; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: 13px; font-weight: 600; color: var(--gris-secondaire); }
+    .field label .req { color: var(--bleu); }
+    .field label .opt { font-weight: 400; color: var(--gris-tertaire); }
+    .field input, .field select, .field textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      border: 1px solid var(--gris-bordure);
+      border-radius: var(--radius-md);
+      background: var(--blanc);
+      color: var(--gris-texte);
+      width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none;
+      border-color: var(--bleu);
+      box-shadow: 0 0 0 3px rgba(24,95,165,0.1);
+    }
+    .field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .field .hint { font-size: 12px; color: var(--gris-tertaire); }
+
+    .chips-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .chip { font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--gris-bordure); border-radius: 20px; cursor: pointer; color: var(--gris-secondaire); background: var(--blanc); transition: all 0.15s; user-select: none; }
+    .chip:hover { border-color: var(--bleu); color: var(--bleu); }
+    .chip.selected { background: var(--bleu-clair); color: var(--bleu-hover); border-color: #85B7EB; }
+
+    .upload-zone { border: 1.5px dashed var(--gris-bordure); border-radius: var(--radius-lg); padding: 28px; text-align: center; cursor: pointer; background: var(--gris-bg); transition: all 0.15s; }
+    .upload-zone:hover { border-color: var(--bleu); background: var(--bleu-clair); }
+    .upload-icon { width: 44px; height: 44px; background: var(--bleu-clair); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .upload-title { font-size: 14px; font-weight: 600; color: var(--gris-texte); margin-bottom: 4px; }
+    .upload-sub { font-size: 12px; color: var(--gris-tertaire); }
+    .upload-btn-label { display: inline-block; font-size: 12px; font-weight: 500; padding: 6px 16px; border: 1px solid var(--gris-bordure); border-radius: var(--radius-md); margin-top: 12px; color: var(--gris-secondaire); background: var(--blanc); transition: all 0.15s; }
+    .upload-zone:hover .upload-btn-label { border-color: var(--bleu); color: var(--bleu); }
+
+    .consent-block { background: var(--gris-bg); border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 24px; }
+    .consent-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .consent-row:last-child { margin-bottom: 0; }
+    .consent-row input[type=checkbox] { margin-top: 3px; flex-shrink: 0; accent-color: var(--bleu); width: 16px; height: 16px; }
+    .consent-text { font-size: 13px; color: var(--gris-secondaire); line-height: 1.6; }
+    .consent-text strong { font-weight: 600; color: var(--gris-texte); }
+
+    .submit-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .submit-note { font-size: 12px; color: var(--gris-tertaire); line-height: 1.6; }
+
+    .success-msg { display: none; background: var(--vert-clair); border: 1px solid #5DCAA5; border-radius: var(--radius-lg); padding: 24px 28px; margin-top: 20px; }
+    .success-msg.show { display: block; }
+    .success-title { font-size: 16px; font-weight: 600; color: var(--vert-hover); margin-bottom: 6px; }
+    .success-text { font-size: 14px; color: #0F6E56; line-height: 1.6; }
+
+    @media(max-width:768px) {
+      .page-hero { padding: 36px 20px 28px; }
+      .form-wrap { padding: 28px 20px; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#185FA5"/>
+      <circle cx="24" cy="20" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+      <circle cx="24" cy="20" r="3" fill="white"/>
+      <path d="M12 44 C12 34 36 34 36 44" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="44" cy="40" r="9" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="4.5" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="1.8" fill="#5DCAA5"/>
+    </svg>
+    <span class="nav-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
+  <a href="depot-cv.html" class="nav-cta">Déposer mon CV</a>
+</nav>
+
+<div class="page-hero">
+  <h1>Dépose ton CV — on s'occupe du reste.</h1>
+  <p>Complète ce formulaire en moins de 3 minutes. Ton profil sera analysé par un membre de notre équipe.</p>
+  <div class="reassure-bar" style="margin-top:14px">
+    <div class="reassure-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>Gratuit pour les représentants</div>
+    <div class="reassure-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>Confidentiel — aucun partage sans ta permission</div>
+    <div class="reassure-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>Sans engagement</div>
+  </div>
+</div>
+
+<div class="form-wrap">
+  <form name="depot-cv" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" id="cvForm">
+    <input type="hidden" name="form-name" value="depot-cv">
+    <input type="hidden" name="bot-field" style="display:none">
+
+    <div class="form-section">
+      <div class="form-section-title">Informations personnelles</div>
+      <div class="field-row">
+        <div class="field"><label>Prénom <span class="req">*</span></label><input type="text" name="prenom" placeholder="Jean" required></div>
+        <div class="field"><label>Nom <span class="req">*</span></label><input type="text" name="nom" placeholder="Tremblay" required></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Courriel <span class="req">*</span></label><input type="email" name="courriel" placeholder="jean.tremblay@courriel.com" required></div>
+        <div class="field"><label>Téléphone <span class="req">*</span></label><input type="tel" name="telephone" placeholder="514 000-0000" required></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Région <span class="req">*</span></label>
+          <select name="region" required>
+            <option value="">Sélectionner...</option>
+            <option>Montréal</option>
+            <option>Québec</option>
+            <option>Laval</option>
+            <option>Rive-Sud de Montréal</option>
+            <option>Rive-Nord de Montréal</option>
+            <option>Estrie</option>
+            <option>Mauricie</option>
+            <option>Autre région du Québec</option>
+          </select>
+        </div>
+        <div class="field"><label>LinkedIn <span class="opt">(optionnel)</span></label><input type="url" name="linkedin" placeholder="linkedin.com/in/jean-tremblay"></div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Ton profil de représentant</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Années d'expérience en ventes B2B <span class="req">*</span></label>
+          <select name="experience" required>
+            <option value="">Sélectionner...</option>
+            <option>Moins de 2 ans</option>
+            <option>2 à 5 ans</option>
+            <option>5 à 10 ans</option>
+            <option>10 à 15 ans</option>
+            <option>15 ans et plus</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Type de vente <span class="req">*</span></label>
+          <select name="type_vente" required>
+            <option value="">Sélectionner...</option>
+            <option>Ventes terrain (externe)</option>
+            <option>Ventes internes</option>
+            <option>Les deux</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row single">
+        <div class="field">
+          <label>Secteurs d'expertise <span class="req">*</span></label>
+          <div class="hint" style="margin-bottom:8px">Sélectionne tous les secteurs où tu as de l'expérience</div>
+          <div class="chips-wrap" id="secteurs">
+            <div class="chip" onclick="toggleChip(this)">Pharmaceutique & santé</div>
+            <div class="chip" onclick="toggleChip(this)">Technologies & SaaS B2B</div>
+            <div class="chip" onclick="toggleChip(this)">Automatisation & robotique</div>
+            <div class="chip" onclick="toggleChip(this)">Construction & matériaux</div>
+            <div class="chip" onclick="toggleChip(this)">Sciences & laboratoires</div>
+            <div class="chip" onclick="toggleChip(this)">Énergie & environnement</div>
+            <div class="chip" onclick="toggleChip(this)">Alimentation & distribution</div>
+            <div class="chip" onclick="toggleChip(this)">Services aux entreprises</div>
+            <div class="chip" onclick="toggleChip(this)">Industriel & manufacturier</div>
+            <div class="chip" onclick="toggleChip(this)">Cybersécurité & TI</div>
+            <div class="chip" onclick="toggleChip(this)">Logistique & approvisionnement</div>
+            <div class="chip" onclick="toggleChip(this)">Autre secteur</div>
+          </div>
+          <input type="hidden" name="secteurs" id="secteursHidden">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Salaire de base actuel ou visé <span class="opt">(optionnel)</span></label>
+          <select name="salaire">
+            <option value="">Préfère ne pas répondre</option>
+            <option>Moins de 50 000 $</option>
+            <option>50 000 $ – 70 000 $</option>
+            <option>70 000 $ – 90 000 $</option>
+            <option>90 000 $ – 110 000 $</option>
+            <option>110 000 $ et plus</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Disponibilité <span class="opt">(optionnel)</span></label>
+          <select name="disponibilite">
+            <option value="">Sélectionner...</option>
+            <option>Immédiatement</option>
+            <option>Dans 2 à 4 semaines</option>
+            <option>Dans 1 à 3 mois</option>
+            <option>Je suis à l'écoute seulement</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row single">
+        <div class="field">
+          <label>Ce que tu recherches <span class="opt">(optionnel)</span></label>
+          <textarea name="recherche" placeholder="Ex. : je cherche un poste de représentant senior dans le secteur technologique, avec une composante de gestion de comptes stratégiques..."></textarea>
+          <div class="hint">Plus tu nous en dis, mieux on peut cibler les bonnes opportunités pour toi.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Ton CV</div>
+      <div class="upload-zone" onclick="document.getElementById('cv-input').click()">
+        <div class="upload-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#185FA5" stroke-width="1.8" stroke-linecap="round"><path d="M10 2v10M6 6l4-4 4 4"/><path d="M3 16h14"/></svg>
+        </div>
+        <div class="upload-title">Glisse ton CV ici ou clique pour parcourir</div>
+        <div class="upload-sub">PDF ou Word — max 5 Mo</div>
+        <div class="upload-btn-label" id="upload-label">Choisir un fichier</div>
+        <input type="file" id="cv-input" name="cv" accept=".pdf,.doc,.docx" style="display:none" onchange="fileSelected(this)">
+      </div>
+    </div>
+
+    <div class="consent-block">
+      <div class="consent-row">
+        <input type="checkbox" id="consent1" name="consent_confidentialite" required>
+        <label for="consent1" class="consent-text"><strong>Confidentialité</strong> — Je comprends que mon CV ne sera jamais transmis à un employeur sans mon accord explicite préalable.</label>
+      </div>
+      <div class="consent-row">
+        <input type="checkbox" id="consent2" name="consent_communication" required>
+        <label for="consent2" class="consent-text"><strong>Communication</strong> — J'accepte d'être contacté par l'équipe RepTalent.ca par courriel ou téléphone concernant des opportunités d'emploi pertinentes.</label>
+      </div>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 2v8M4 6l4 4 4-4"/><path d="M2 12h12"/></svg>
+        Soumettre mon profil
+      </button>
+      <div class="submit-note">Nous t'accuserons réception dans les 24 heures ouvrables.<br>Aucune carte de crédit. Aucun abonnement.</div>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-title">Profil reçu — merci !</div>
+      <div class="success-text">Ton CV a bien été soumis. Un membre de notre équipe va analyser ton profil et te contactera sous peu si une opportunité correspond à ton parcours.</div>
+    </div>
+  </form>
+</div>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></div>
+    <div class="footer-sub">Spécialiste en recherche de talents</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
+  <div class="footer-copy">© 2025 RepTalent.ca · rep-talent.ca · Montréal, Québec</div>
+</footer>
+
+<script>
+function toggleChip(el){
+  el.classList.toggle('selected');
+  const selected=[...document.querySelectorAll('.chip.selected')].map(c=>c.textContent).join(', ');
+  document.getElementById('secteursHidden').value=selected;
+}
+function fileSelected(input){
+  const label=document.getElementById('upload-label');
+  if(input.files&&input.files[0]){
+    label.textContent=input.files[0].name;
+    label.style.color='var(--bleu)';
+    label.style.fontWeight='600';
+  }
+}
+</script>
+</body>
+</html>
