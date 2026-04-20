@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil reçu — RepTalent</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .confirmation-wrap {
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: var(--gris-bg);
+    }
+    .confirmation-card {
+      background: var(--blanc);
+      border: 1px solid var(--gris-bordure);
+      border-radius: var(--radius-lg);
+      padding: 56px 48px;
+      max-width: 580px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .check-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--vert-clair);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .confirmation-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gris-texte);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .confirmation-sub {
+      font-size: 16px;
+      color: var(--gris-secondaire);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .steps-mini {
+      background: var(--gris-bg);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+    .steps-mini-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gris-tertaire);
+      margin-bottom: 14px;
+    }
+    .step-mini {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .step-mini:last-child { margin-bottom: 0; }
+    .step-mini-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--bleu-clair);
+      color: var(--bleu-hover);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-mini-text {
+      font-size: 13px;
+      color: var(--gris-secondaire);
+      line-height: 1.55;
+    }
+    .step-mini-text strong {
+      font-weight: 600;
+      color: var(--gris-texte);
+    }
+    .confirmation-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .reassure-mini {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gris-bordure);
+    }
+    .reassure-mini-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--gris-tertaire);
+    }
+    @media(max-width:600px) {
+      .confirmation-card { padding: 36px 24px; }
+      .confirmation-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="14" fill="#185FA5"/>
+      <circle cx="24" cy="20" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+      <circle cx="24" cy="20" r="3" fill="white"/>
+      <path d="M12 44 C12 34 36 34 36 44" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="44" cy="40" r="9" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="4.5" fill="none" stroke="#5DCAA5" stroke-width="2.2"/>
+      <circle cx="44" cy="40" r="1.8" fill="#5DCAA5"/>
+    </svg>
+    <span class="nav-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></span>
+  </a>
+</nav>
+
+<div class="confirmation-wrap">
+  <div class="confirmation-card">
+
+    <div class="check-circle">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 16l7 7L26 9"/>
+      </svg>
+    </div>
+
+    <div class="confirmation-title">Ton profil a bien été reçu !</div>
+    <p class="confirmation-sub">Merci de nous avoir fait confiance. Un membre de notre équipe va analyser ton CV et te contactera personnellement si une opportunité correspond à ton profil.</p>
+
+    <div class="steps-mini">
+      <div class="steps-mini-title">Ce qui se passe maintenant</div>
+      <div class="step-mini">
+        <div class="step-mini-num">1</div>
+        <div class="step-mini-text"><strong>Analyse de ton profil</strong> — Notre équipe examine ton CV dans les 24 heures ouvrables.</div>
+      </div>
+      <div class="step-mini">
+        <div class="step-mini-num">2</div>
+        <div class="step-mini-text"><strong>On te contacte</strong> — Si ton profil correspond à un mandat actif, nous te rejoignons par courriel ou téléphone.</div>
+      </div>
+      <div class="step-mini">
+        <div class="step-mini-num">3</div>
+        <div class="step-mini-text"><strong>Tu décides</strong> — On te présente l'opportunité en détail. C'est toi qui choisis si tu veux aller de l'avant — sans pression.</div>
+      </div>
+    </div>
+
+    <div class="confirmation-actions">
+      <a href="index.html" class="btn-primary">Retour à l'accueil</a>
+      <a href="domaines.html" class="btn-secondary">Voir les domaines & postes</a>
+    </div>
+
+    <div class="reassure-mini">
+      <div class="reassure-mini-item">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
+        Confidentiel
+      </div>
+      <div class="reassure-mini-item">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
+        Gratuit
+      </div>
+      <div class="reassure-mini-item">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"><path d="M2 7l3.5 3.5L12 4"/></svg>
+        Sans engagement
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div>
+    <div class="footer-logo-text"><span class="rep">Rep</span><span class="talent">Talent</span></div>
+    <div class="footer-sub">Spécialiste en recherche de talents</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Accueil</a>
+    <a href="domaines.html">Domaines & postes</a>
+    <a href="comment-ca-fonctionne.html">Comment ça fonctionne</a>
+    <a href="a-propos.html">À propos</a>
+  </div>
+  <div class="footer-copy">© 2025 RepTalent.ca · rep-talent.ca · Montréal, Québec</div>
+</footer>
+
+</body>
+</html>
