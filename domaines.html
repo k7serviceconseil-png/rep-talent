@@ -18,6 +18,10 @@
     .pill { font-size: 12px; font-weight: 500; padding: 6px 14px; border: 1px solid var(--gris-bordure); border-radius: 20px; cursor: pointer; color: var(--gris-secondaire); background: var(--blanc); transition: all 0.15s; }
     .pill:hover { border-color: var(--bleu); color: var(--bleu); }
     .pill.active { background: var(--bleu-clair); color: var(--bleu-hover); border-color: #85B7EB; }
+    .pill-urgent { background: #FCEBEB; color: #A32D2D; border: 1px solid #F09595; font-weight: 700; animation: blink-pill 1.4s ease-in-out infinite; }
+    .pill-urgent:hover { background: #F09595; color: #791F1F; }
+    .pill-urgent.active { background: #E24B4A; color: white; border-color: #A32D2D; animation: none; }
+    @keyframes blink-pill { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(226,75,74,0); } 50% { opacity: 0.75; box-shadow: 0 0 10px 3px rgba(226,75,74,0.3); } }
     .edit-btn { font-size: 12px; font-weight: 500; padding: 7px 16px; border: 1px solid var(--gris-bordure); border-radius: var(--radius-md); cursor: pointer; color: var(--gris-secondaire); background: var(--blanc); transition: all 0.15s; white-space: nowrap; }
     .edit-btn:hover { border-color: var(--bleu); color: var(--bleu); }
     .edit-btn.on { background: var(--bleu-clair); color: var(--bleu-hover); border-color: #85B7EB; }
@@ -97,7 +101,7 @@
 <div class="toolbar">
   <div class="filter-pills">
     <div class="pill active" onclick="filterAll(this)">Tous les secteurs</div>
-    <div class="pill" onclick="filterTag(this,'urgent')">Urgent</div>
+    <div class="pill pill-urgent" onclick="filterTag(this,'urgent')">Urgent</div>
     <div class="pill" onclick="filterTag(this,'nouveau')">Nouveaux postes</div>
     <div class="pill" onclick="filterTag(this,'spécialisé')">Très spécialisé</div>
   </div>
